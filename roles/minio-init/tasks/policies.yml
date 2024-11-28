@@ -1,0 +1,24 @@
+---
+- name: Manage MinIO policies
+  block:
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-policy-create.html
+    - name: Add policy
+      ansible.builtin.command: >
+        mc admin policy create myminio {{ item.name }} {{ item.policy_file }}
+      register: policy_result
+      when: item.state | default('present') == 'present'
+      changed_when: policy_result.rc == 0
+      failed_when:
+        - policy_result.rc != 0
+        - '"already exists" not in policy_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-policy-remove.html
+    - name: Remove policy
+      ansible.builtin.command: >
+        mc admin policy rm myminio {{ item.name }}
+      register: policy_remove_result
+      when: item.state | default('present') == 'absent'
+      changed_when: policy_remove_result.rc == 0
+      failed_when:
+        - policy_remove_result.rc != 0
+        - '"does not exist" not in policy_remove_result.stderr'

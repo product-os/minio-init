@@ -1,0 +1,46 @@
+
+services:
+
+  minio:
+    image: minio/minio:RELEASE.2024-10-29T16-01-48Z
+    command: server /data --console-address ""
+    environment:
+      MINIO_BROWSER: off
+      # Generate S3 Access Key (20 chars, uppercase alphanumeric)
+      # MINIO_ROOT_USER=$(openssl rand -hex 10 | tr 'a-z' 'A-Z')
+      # Generate S3 Secret Key (40 chars, mixed case alphanumeric)
+      # MINIO_ROOT_PASSWORD=$(openssl rand -base64 30 | tr '+/' 'xx' | cut -c1-40)
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - minio-network
+    # volumes:
+    #   - minio-data:/data
+    tmpfs:
+      - /tmp
+      - /data
+
+  sut:
+    build: .
+    networks:
+      - minio-network
+    depends_on:
+      - minio
+    tmpfs:
+      - /tmp
+    environment:
+      MINIO_SERVER_URL: http://minio:9000
+      # These must match the root user credentials on minio
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+
+volumes:
+  minio-data: {}
+
+networks:
+  minio-network: {}

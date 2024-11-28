@@ -1,0 +1,7 @@
+---
+- name: Configure mc client
+  ansible.builtin.command: >
+    mc alias set myminio {{ minio_server_url }} {{ minio_access_key }} {{ minio_secret_key }}
+  changed_when: false
+  # This is needed to configure mc client, so we don't want to skip on check mode
+  check_mode: false

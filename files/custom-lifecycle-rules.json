@@ -1,0 +1,11 @@
+{
+  "Rules": [
+    {
+      "ID": "cleanup",
+      "Status": "Enabled",
+      "Expiration": {
+        "Days": 90
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+---
+- name: Include client tasks
+  include_tasks: client.yml
+
+- name: Include bucket tasks
+  include_tasks: buckets.yml
+  loop: "{{ minio_buckets }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Include policy tasks
+  include_tasks: policies.yml
+  loop: "{{ minio_policies }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Include user tasks
+  include_tasks: users.yml
+  loop: "{{ minio_users }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Include access key tasks
+  include_tasks: access_keys.yml
+  loop: "{{ minio_access_keys }}"
+  loop_control:
+    label: "{{ item.name }}"

@@ -1,0 +1,34 @@
+---
+- name: Manage MinIO users
+  block:
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-user-add.html
+    - name: Create user
+      ansible.builtin.command: >
+        mc admin user add myminio {{ item.name }} {{ item.password }}
+      when: item.state | default('present') == 'present'
+      register: user_result
+      changed_when: user_result.rc == 0
+      failed_when:
+        - user_result.rc != 0
+        - '"already exists" not in user_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-policy-attach.html
+    - name: Attach user policies
+      ansible.builtin.command: >
+        mc admin policy attach myminio {{ item.policies | join(' ') }} --user {{ item.name }}
+      when:
+        - item.state | default('present') == 'present'
+        - item.policies is defined
+      register: policy_attach_result
+      changed_when: policy_attach_result.rc == 0
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-user-remove.html
+    - name: Remove user
+      ansible.builtin.command: >
+        mc admin user rm myminio {{ item.name }}
+      when: item.state | default('present') == 'absent'
+      register: user_remove_result
+      changed_when: user_remove_result.rc == 0
+      failed_when:
+        - user_remove_result.rc != 0
+        - '"does not exist" not in user_remove_result.stderr'

@@ -1,0 +1,46 @@
+---
+- name: Manage MinIO buckets
+  block:
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-mb.html
+    - name: Create bucket
+      ansible.builtin.command: "mc mb myminio/{{ item.name }} --ignore-existing"
+      when:
+        - item.state | default('present') == 'present'
+      register: mb_result
+      changed_when: mb_result.rc == 0
+      failed_when:
+        - mb_result.rc != 0
+        - '"already exists" not in mb_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-rb.html
+    - name: Remove bucket
+      ansible.builtin.command: "mc rb --force myminio/{{ item.name }}"
+      when: item.state | default('present') == 'absent'
+      register: rb_result
+      changed_when: rb_result.rc == 0
+      failed_when:
+        - rb_result.rc != 0
+        - '"does not exist" not in rb_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-version-enable.html
+    - name: Configure bucket versioning
+      ansible.builtin.command: >
+        mc version {{ item.versioning | default('disabled') }} myminio/{{ item.name }}
+      when:
+        - item.state | default('present') == 'present'
+        - item.versioning is defined
+      register: version_result
+      changed_when: version_result.rc == 0
+
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-ilm-rule-import.html
+    - name: Manage lifecycle rules
+      when:
+        - item.state | default('present') == 'present'
+        - item.lifecycle_file is defined
+      ansible.builtin.shell: >
+        mc ilm rule import myminio/{{ item.name }} < '{{ item.lifecycle_file }}'
+      register: ilm_result
+      changed_when: ilm_result.rc == 0
+      failed_when:
+        - ilm_result.rc != 0
+        - '"already exists" not in ilm_result.stderr'

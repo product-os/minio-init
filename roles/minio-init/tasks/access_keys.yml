@@ -1,0 +1,77 @@
+---
+- name: Manage MinIO access keys
+  block:
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-create.html
+    - name: Create access key
+      ansible.builtin.command: >
+        mc admin accesskey create myminio {{ item.associated_user }} --access-key {{ item.name }}
+      register: accesskey_create_result
+      when: item.state | default('present') == 'present'
+      changed_when: accesskey_create_result.rc == 0
+      failed_when:
+        - accesskey_create_result.rc != 0
+        - '"key already taken" not in accesskey_create_result.stderr'
+        - '"does not exist" not in accesskey_create_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-remove.html
+    - name: Remove access key
+      ansible.builtin.command: >
+        mc admin accesskey rm myminio {{ item.name }}
+      when: item.state | default('present') == 'absent'
+      register: accesskey_remove_result
+      changed_when: accesskey_remove_result.rc == 0
+      failed_when:
+        - accesskey_remove_result.rc != 0
+        - '"account is not found" not in accesskey_remove_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-edit.html
+    - name: Update access key secret key
+      ansible.builtin.command: >
+        mc admin accesskey edit myminio {{ item.name }} --secret-key {{ item.secret_key }}
+      when:
+        - item.state | default('present') == 'present'
+        - item.secret_key is defined
+      register: accesskey_edit_result
+      changed_when: accesskey_edit_result.rc == 0
+      failed_when:
+        - accesskey_edit_result.rc != 0
+        - '"does not exist" not in accesskey_edit_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-edit.html
+    - name: Update access key expiry duration
+      ansible.builtin.command: >
+        mc admin accesskey edit myminio {{ item.name }} --expiry-duration "{{ item.expiry_duration }}"
+      when:
+        - item.state | default('present') == 'present'
+        - item.expiry_duration is defined
+      register: accesskey_edit_result
+      changed_when: accesskey_edit_result.rc == 0
+      failed_when:
+        - accesskey_edit_result.rc != 0
+        - '"does not exist" not in accesskey_edit_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-edit.html
+    - name: Update access key description
+      ansible.builtin.command: >
+        mc admin accesskey edit myminio {{ item.name }} --description "{{ item.description }}"
+      when:
+        - item.state | default('present') == 'present'
+        - item.description is defined
+      register: accesskey_edit_result
+      changed_when: accesskey_edit_result.rc == 0
+      failed_when:
+        - accesskey_edit_result.rc != 0
+        - '"does not exist" not in accesskey_edit_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc-admin/mc-admin-accesskey-edit.html
+    - name: Update access key policy
+      ansible.builtin.command: >
+        mc admin accesskey edit myminio {{ item.name }} --policy "{{ item.policy_file }}"
+      when:
+        - item.state | default('present') == 'present'
+        - item.policy_file is defined
+      register: accesskey_edit_result
+      changed_when: accesskey_edit_result.rc == 0
+      failed_when:
+        - accesskey_edit_result.rc != 0
+        - '"does not exist" not in accesskey_edit_result.stderr'

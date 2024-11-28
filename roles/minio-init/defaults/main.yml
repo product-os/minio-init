@@ -1,0 +1,35 @@
+---
+# MinIO server connection details
+minio_server_url: "http://localhost:9000"
+minio_access_key: "minioadmin"
+minio_secret_key: "minioadmin"
+
+# Buckets configuration
+minio_buckets: []
+  # - name: "bucket1"
+  #   state: present  # or absent
+  #   versioning: enable  # or suspend
+  #   lifecycle_file: "path/to/lifecycle.json"
+
+# Users configuration
+minio_users: []
+  # - name: "user1"
+  #   password: "password123"
+  #   policies: ["readwrite"]
+  #   state: present  # or absent
+
+# Policies configuration
+minio_policies: []
+  # - name: "custom-policy"
+  #   policy_file: "path/to/policy.json"
+  #   state: present  # or absent
+
+# Access keys configuration
+minio_access_keys: []
+  # - name: "access-key1"
+  #   associated_user: "user1"
+  #   state: present  # or absent
+  #   secret_key: "secret-key123"
+  #   expiry_duration: "1h"
+  #   description: "Access key for user1"
+  #   policy_file: "path/to/policy.json"
