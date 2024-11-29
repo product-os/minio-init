@@ -1,0 +1,26 @@
+---
+minio_buckets:
+  - name: "test-bucket"
+    state: present
+    versioning: enable
+    lifecycle_file: "/config/files/custom-lifecycle-rules.json"
+
+minio_users:
+  - name: "testuser"
+    password: "testpass123"
+    policies: ["readwrite"]
+    state: absent
+
+minio_policies:
+  - name: "custom-readonly"
+    policy_file: "/config/files/custom-readonly-policy.json"
+    state: present
+
+minio_access_keys:
+  - name: "test-service-account"
+    associated_user: "testuser"
+    state: present
+    secret_key: "testsecret123"
+    expiry_duration: "1h"
+    description: "Access key for testuser"
+    policy_file: "/config/files/custom-readonly-policy.json"

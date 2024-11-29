@@ -53,29 +53,11 @@ minio_buckets:
 Then run with your config:
 
 ```bash
-docker run -v $(pwd)/config.yml:/ansible/config.yml \
+docker run -v $(pwd)/config.yml:/config/config.yml \
           -e MINIO_ENDPOINT=your-minio-server \
           -e MINIO_ACCESS_KEY=your-access-key \
           -e MINIO_SECRET_KEY=your-secret-key \
-          minio-init
-```
-
-## Project Structure
-
-```text
-.
-├── Dockerfile              # Container definition
-├── ansible.cfg            # Ansible configuration
-├── test.yml              # Main playbook
-└── roles
-    └── minio-init
-        ├── tasks
-        │   ├── main.yml
-        │   ├── access_keys.yml
-        │   ├── users.yml
-        │   └── buckets.yml
-        └── defaults
-            └── main.yml
+          minio-init --extra-vars @/config/config.yml
 ```
 
 ## Environment Variables
@@ -88,15 +70,13 @@ docker run -v $(pwd)/config.yml:/ansible/config.yml \
 
 ## Development
 
-To run the playbook in check mode:
+To run the playbook with the test configuration:
 
 ```bash
-docker run --rm minio-init ansible-playbook test.yml --check
+docker compose -f docker-compose.test.yml up sut --build
 ```
 
 ## License
-
-Copyright 2024 Balena Ltd.
 
 Licensed under the Apache License, Version 2.0.
 See [LICENSE](./LICENSE) for the full license text.
