@@ -20,7 +20,7 @@ minio_access_keys:
   - name: "test-service-account"
     associated_user: "testuser"
     state: present
-    secret_key: "newsecret456"
+    secret_key: "{{ lookup('community.general.random_string', base64=true, length=30) }}"
     expiry_duration: "24h"
     description: "Updated access key for testuser"
     policy_file: "/config/files/custom-readonly-policy.json"
