@@ -1,0 +1,4 @@
+---
+minio_access_keys:
+  - name: "test-service-account"
+    state: absent

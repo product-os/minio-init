@@ -1,0 +1,5 @@
+---
+minio_users:
+  - name: "testuser"
+    password: "newpassword456"
+    policies: ["readonly"]

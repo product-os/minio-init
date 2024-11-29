@@ -36,10 +36,16 @@ Containerized Ansible role for automated MinIO server initialization and configu
 ## Configuration
 
 The role behavior can be customized through Ansible variables.
-Create a configuration file and mount it when running the container:
+Create an inventory directory or file and mount it when running the container.
+
+```ini
+# ./config/inventory.ini
+[minio]
+localhost ansible_connection=local
+```
 
 ```yaml
-# config.yml example
+# ./config/host_vars/minio.yml
 minio_users:
   - name: service1
     access_key: access1
@@ -53,11 +59,11 @@ minio_buckets:
 Then run with your config:
 
 ```bash
-docker run -v $(pwd)/config.yml:/config/config.yml \
+docker run -v $(pwd)/config:/config \
           -e MINIO_ENDPOINT=your-minio-server \
           -e MINIO_ACCESS_KEY=your-access-key \
           -e MINIO_SECRET_KEY=your-secret-key \
-          minio-init --extra-vars @/config/config.yml
+          minio-init --inventory /config/inventory.ini
 ```
 
 ## Environment Variables

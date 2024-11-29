@@ -1,0 +1,4 @@
+---
+minio_policies:
+  - name: "custom-readonly"
+    state: absent

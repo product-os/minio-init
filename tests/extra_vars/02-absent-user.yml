@@ -1,0 +1,4 @@
+---
+minio_users:
+  - name: "testuser"
+    state: absent
