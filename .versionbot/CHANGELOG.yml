@@ -1,0 +1,14 @@
+- commits:
+    - subject: Extend the test suite with example config changes
+      hash: a3faad076cfef1eac04b6047abd825a5f29f9c94
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.0.2
+  title: ""
+  date: 2024-11-29T14:35:52.042Z
