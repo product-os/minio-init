@@ -19,13 +19,14 @@ services:
       retries: 5
     networks:
       - minio-network
-    # volumes:
-    #   - minio-data:/data
+    volumes:
+      - minio-data:/data
     tmpfs:
       - /tmp
-      - /data
+      # - /data
 
   sut:
+    image: sut
     build: .
     networks:
       - minio-network
@@ -33,11 +34,23 @@ services:
       - minio
     tmpfs:
       - /tmp
+    volumes:
+      - ./tests:/config:ro
     environment:
       MINIO_SERVER_URL: http://minio:9000
       # These must match the root user credentials on minio
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - |
+        set -ex
+        ansible-playbook playbooks/main.yml
+        for config in $(ls /config/vars/*.yml); do
+          ansible-playbook playbooks/main.yml --extra-vars "@$${config}"
+        done
 
 volumes:
   minio-data: {}

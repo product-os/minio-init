@@ -1,8 +1,11 @@
 ---
 # MinIO server connection details
-minio_server_url: "http://localhost:9000"
-minio_access_key: "minioadmin"
-minio_secret_key: "minioadmin"
+minio_server_url: "{{ lookup('ansible.builtin.env', 'MINIO_SERVER_URL') }}"
+minio_access_key: "{{ lookup('ansible.builtin.env', 'MINIO_ACCESS_KEY') }}"
+minio_secret_key: "{{ lookup('ansible.builtin.env', 'MINIO_SECRET_KEY') }}"
+# minio_server_url: "http://localhost:9000"
+# minio_access_key: "minioadmin"
+# minio_secret_key: "minioadmin"
 
 # Buckets configuration
 minio_buckets: []

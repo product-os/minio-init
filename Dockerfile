@@ -16,9 +16,9 @@ RUN mc --version
 WORKDIR /ansible
 
 # Copy Ansible files
-COPY inventory test.yml ansible.cfg ./
+COPY inventory ansible.cfg ./
 COPY roles ./roles
-COPY files ./files
+COPY playbooks ./playbooks
 
 # Run playbook
-ENTRYPOINT ["ansible-playbook", "test.yml"]
+ENTRYPOINT ["ansible-playbook", "playbooks/main.yml"]

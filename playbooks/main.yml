@@ -1,0 +1,5 @@
+---
+- hosts: minio
+  gather_facts: false
+  roles:
+    - role: minio-init
