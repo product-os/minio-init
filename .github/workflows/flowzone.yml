@@ -44,4 +44,4 @@ jobs:
     with:
       restrict_custom_actions: false
       docker_images:
-        ghcr.io/balena-io-experimental/minio-init
+        ghcr.io/product-os/minio-init
