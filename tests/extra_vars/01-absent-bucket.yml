@@ -1,0 +1,4 @@
+---
+minio_buckets:
+  - name: "test-bucket"
+    state: absent

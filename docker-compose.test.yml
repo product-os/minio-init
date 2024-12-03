@@ -48,8 +48,8 @@ services:
       - |
         set -ex
         ansible-playbook playbooks/main.yml
-        for config in $(ls /config/vars/*.yml); do
-          ansible-playbook playbooks/main.yml --extra-vars "@$${config}"
+        for config in $(ls /config/extra_vars/*.yml); do
+          ansible-playbook playbooks/main.yml --extra-vars "@$${config}" --inventory /config/inventory.ini
         done
 
 volumes:

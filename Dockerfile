@@ -16,7 +16,7 @@ RUN mc --version
 WORKDIR /ansible
 
 # Copy Ansible files
-COPY inventory ansible.cfg ./
+COPY inventory.ini ansible.cfg ./
 COPY roles ./roles
 COPY playbooks ./playbooks
 

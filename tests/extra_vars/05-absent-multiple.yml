@@ -1,0 +1,8 @@
+---
+minio_users:
+  - name: "testuser"
+    state: absent
+
+minio_policies:
+  - name: "custom-readonly"
+    state: absent
