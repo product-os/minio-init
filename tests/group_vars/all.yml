@@ -2,8 +2,11 @@
 minio_buckets:
   - name: "test-bucket"
     state: present
-    versioning: enable
     lifecycle_file: "/config/files/custom-lifecycle-rules.json"
+  - name: "test-bucket-2"
+    state: present
+    versioning: enable
+    expire_days: 10
 
 minio_users:
   - name: "testuser"
