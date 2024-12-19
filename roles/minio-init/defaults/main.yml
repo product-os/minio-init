@@ -13,6 +13,7 @@ minio_buckets: []
   #   state: present  # or absent
   #   versioning: enable  # or suspend
   #   lifecycle_file: "path/to/lifecycle.json"
+  #   expire_days: 10
 
 # Users configuration
 minio_users: []
