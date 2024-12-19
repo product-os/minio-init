@@ -1,6 +1,6 @@
 FROM minio/mc:RELEASE.2024-11-05T11-29-45Z AS mc
 
-FROM python:3.13.0-alpine
+FROM python:3.13.1-alpine
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache bash yq
