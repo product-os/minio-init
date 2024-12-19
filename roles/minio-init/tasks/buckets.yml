@@ -32,8 +32,35 @@
       register: version_result
       changed_when: version_result.rc == 0
 
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-ilm-rule-rm.html
+    - name: Remove all ILM rules
+      ansible.builtin.command: >
+        mc ilm rule rm myminio/{{ item.name }} --all --force
+      when:
+        - item.state | default('present') == 'present'
+        - item.expire_days is defined or item.lifecycle_file is defined
+      register: ilm_result
+      changed_when: ilm_result.rc == 0
+      failed_when:
+        - ilm_result.rc != 0
+        - '"does not exist" not in ilm_result.stderr'
+
+    # https://min.io/docs/minio/linux/reference/minio-mc/mc-ilm-rule-add.html
+    - name: Add expire days ILM rule
+      ansible.builtin.command: >
+        mc ilm rule add myminio/{{ item.name }} --expire-all-object-versions --expire-days {{ item.expire_days }}
+      when:
+        - item.state | default('present') == 'present'
+        - item.expire_days is defined
+      register: ilm_result
+      changed_when: ilm_result.rc == 0
+      failed_when:
+        - ilm_result.rc != 0
+        - '"already exists" not in ilm_result.stderr'
+
+    # This overrides the added ILM rule(s) above.
     # https://min.io/docs/minio/linux/reference/minio-mc/mc-ilm-rule-import.html
-    - name: Manage lifecycle rules
+    - name: Import ILM rule configuration
       when:
         - item.state | default('present') == 'present'
         - item.lifecycle_file is defined

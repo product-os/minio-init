@@ -16,9 +16,12 @@ RUN mc --version
 WORKDIR /ansible
 
 # Copy Ansible files
-COPY inventory.ini ansible.cfg ./
+COPY ansible.cfg ./
 COPY roles ./roles
 COPY playbooks ./playbooks
+
+# This directory should be mounted by the user
+COPY tests/inventory.ini /config/inventory.ini
 
 # Run playbook
 ENTRYPOINT ["ansible-playbook", "playbooks/main.yml"]
