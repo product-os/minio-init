@@ -1,4 +1,20 @@
 - commits:
+    - subject: Add expire_days property to buckets
+      hash: 2cdf7f45fa13a2ac134e17231214541442013d7f
+      body: |
+        This allows us to set expire days via env vars
+        rather than only lifecyle rule files.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.0.4
+  title: ""
+  date: 2024-12-19T18:47:31.618Z
+- commits:
     - subject: Fix instructions and tests to use config inheritance
       hash: fa5d4598710761ed6ee3d2a16bca2e22cc4c9169
       body: |
