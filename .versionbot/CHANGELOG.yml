@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook pre-commit/pre-commit-hooks to v3.4.0
+      hash: 4acc1391ca7f513772526304c09be128e7ffd76b
+      body: |
+        Update pre-commit/pre-commit-hooks from 3.2.0 to 3.4.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.0.10
+  title: ""
+  date: 2024-12-30T21:26:56.726Z
+- commits:
     - subject: Update pre-commit hook igorshubovych/markdownlint-cli to v0.43.0
       hash: 6ba86a0cf7e8ab44096117e502297acd59f13324
       body: |
