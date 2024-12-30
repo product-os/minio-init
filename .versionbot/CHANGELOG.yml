@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook crate-ci/typos to v1.27.3
+      hash: 1e6261633c08f751572dfd17cfcc16f682331635
+      body: |
+        Update crate-ci/typos from 1.27.0 to 1.27.3
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.0.6
+  title: ""
+  date: 2024-12-30T17:34:15.918Z
+- commits:
     - subject: Update python Docker tag to v3.13.1
       hash: 619c6e49937222c90458fbb1d13e0c963d710727
       body: |
