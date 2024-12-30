@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook igorshubovych/markdownlint-cli to v0.43.0
+      hash: 6ba86a0cf7e8ab44096117e502297acd59f13324
+      body: |
+        Update igorshubovych/markdownlint-cli from 0.42.0 to 0.43.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.0.9
+  title: ""
+  date: 2024-12-30T20:24:33.423Z
+- commits:
     - subject: Update pre-commit hook crate-ci/typos to v1.28.4
       hash: 68609f17887dd82436a9dfac021242023ae3d467
       body: |
