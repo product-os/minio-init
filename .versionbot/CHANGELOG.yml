@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook rhysd/actionlint to v1.7.5
+      hash: f25a0f52bc2b86d9c6e80bfd51bdbb51acb1e5bb
+      body: |
+        Update rhysd/actionlint from 1.7.3 to 1.7.5
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.0.7
+  title: ""
+  date: 2024-12-30T18:25:12.561Z
+- commits:
     - subject: Update pre-commit hook crate-ci/typos to v1.27.3
       hash: 1e6261633c08f751572dfd17cfcc16f682331635
       body: |
