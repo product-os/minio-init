@@ -1,4 +1,4 @@
-FROM minio/mc:RELEASE.2024-11-05T11-29-45Z AS mc
+FROM pgsty/mc:RELEASE.2026-09-13T00-00-00Z AS mc
 
 FROM python:3.13.1-alpine
 
