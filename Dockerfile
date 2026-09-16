@@ -3,7 +3,7 @@ FROM pgsty/mc:RELEASE.2026-09-13T00-00-00Z AS mc
 FROM python:3.13.1-alpine
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache bash yq
+RUN apk add --no-cache bash
 
 WORKDIR /ansible
 
