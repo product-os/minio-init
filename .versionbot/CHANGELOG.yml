@@ -1,4 +1,64 @@
 - commits:
+    - subject: Switch to pgsty/minio images
+      hash: e3f0fd1817cd848af8bae5d5477f7dc2f94d7fac
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: https://balena.fibery.io/Work/Project/2938
+        see: https://balena.fibery.io/Work/Project/2938
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+    - subject: Drop the unused yq package
+      hash: 2ef760a17bd83e6b5bd5c9f8bc1cc89ec5259346
+      body: |
+        No role, playbook, test, or workflow calls yq.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+    - subject: Pin ansible-core and drop unused dependencies
+      hash: a9c34ff229a768fb2e5a8d099181d61c6fbdd160
+      body: |
+        Install ansible-core from requirements.txt instead of the full ansible
+        package. The role uses only ansible.builtin modules, so the bundled
+        collections never load. The unpinned bundle is also what delivered the
+        community.general callback removal on rebuild.
+
+        Drop boto3 and the amazon.aws and ansible.posix collections. No task
+        references them. collections_path in ansible.cfg also excludes the
+        galaxy install directory, so Ansible could not load the collections.
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+    - subject: Replace the removed community.general.yaml callback
+      hash: 97c6ff54c38517c8820a30a21cfd2252cbf79883
+      body: |
+        community.general 12.0.0 removed the yaml stdout callback. Use the
+        default callback with YAML result formatting instead.
+
+        The ini key is callback_result_format, not result_format -- the latter
+        is the plugin option name and is silently ignored in ansible.cfg.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.1.0
+  title: ""
+  date: 2026-09-17T04:41:31.885Z
+- commits:
     - subject: Update pre-commit hook pre-commit/pre-commit-hooks to v3.4.0
       hash: 4acc1391ca7f513772526304c09be128e7ffd76b
       body: |
