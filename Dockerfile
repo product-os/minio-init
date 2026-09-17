@@ -1,19 +1,19 @@
-FROM minio/mc:RELEASE.2024-11-05T11-29-45Z AS mc
+FROM pgsty/mc:RELEASE.2026-09-13T00-00-00Z AS mc
 
 FROM python:3.13.1-alpine
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache bash yq
+RUN apk add --no-cache bash
 
-# Install Ansible and required collections
-# hadolint ignore=DL3013
-RUN pip install ansible boto3 --no-cache-dir && \
-    ansible-galaxy collection install amazon.aws ansible.posix
+WORKDIR /ansible
+
+# Install Ansible. The role uses only ansible.builtin modules, so
+# ansible-core is enough and no collections are needed.
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --from=mc /usr/bin/mc /usr/bin/mc
 RUN mc --version
-
-WORKDIR /ansible
 
 # Copy Ansible files
 COPY ansible.cfg ./
