@@ -1,4 +1,4 @@
-FROM pgsty/mc:RELEASE.2026-09-13T00-00-00Z AS mc
+FROM pgsty/mc:RELEASE.2026-10-18T00-00-00Z@sha256:6ecdaec70bc5e8cf9d0e9a70c190f3beb1c83f11617ff4333f1fcd71ab1daf18 AS mc
 
 FROM python:3.13.1-alpine
 
