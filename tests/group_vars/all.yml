@@ -13,6 +13,10 @@ minio_users:
     password: "testpass123"
     policies: ["readwrite"]
     state: present
+  - name: "randomuser"
+    password: "{{ lookup('community.general.random_string', base64=true, length=30) }}"
+    policies: ["readonly"]
+    state: present
 
 minio_policies:
   - name: "custom-readonly"

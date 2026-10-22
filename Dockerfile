@@ -7,10 +7,11 @@ RUN apk add --no-cache bash
 
 WORKDIR /ansible
 
-# Install Ansible. The role uses only ansible.builtin modules, so
-# ansible-core is enough and no collections are needed.
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Ansible. The role uses only ansible.builtin modules, but user
+# config may call community.general lookups such as random_string.
+COPY requirements.txt requirements.yml ./
+RUN pip install --no-cache-dir -r requirements.txt && \
+    ansible-galaxy collection install -r requirements.yml -p /ansible/collections
 
 COPY --from=mc /usr/bin/mc /usr/bin/mc
 RUN mc --version
