@@ -1,4 +1,25 @@
 - commits:
+    - subject: Install the community.general collection
+      hash: c6e4b71d69c19afefeaab42019b92a58e82b7167
+      body: |
+        Consumer config can call community.general lookups. The github-runners
+        config uses random_string for user passwords, which broke when 0.1.0
+        switched to ansible-core and dropped the bundled collections.
+
+        Pin community.general in requirements.yml and install it into
+        collections_path. Add a test user that calls random_string so the
+        collection cannot silently go missing again.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.1.7
+  title: ""
+  date: 2026-10-22T23:02:35.356Z
+- commits:
     - subject: Update dependency flowzonify to v0.4.22
       hash: 3bb1d6e07bd1002bd497093c101214eac4b4a737
       body: |
