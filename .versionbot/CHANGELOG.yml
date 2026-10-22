@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update actions/setup-python action to v5
+      hash: aa56387d67ba64aba57f0fa0a81ea6a4ea201cfc
+      body: |
+        Update actions/setup-python from 3.1.4 to 5.6.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.1.2
+  title: ""
+  date: 2026-10-22T19:00:50.511Z
+- commits:
     - subject: Update minio
       hash: 15d30b247a906c450412b1b5b9bc08a4a22464d4
       body: >
