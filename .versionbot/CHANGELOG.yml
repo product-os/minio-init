@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency flowzonify to v0.4.22
+      hash: 3bb1d6e07bd1002bd497093c101214eac4b4a737
+      body: |
+        Update flowzonify from 0.0.0 to 0.4.22
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.1.6
+  title: ""
+  date: 2026-10-22T22:47:48.265Z
+- commits:
     - subject: Update dependency ansible-core to v2.21.5
       hash: 24adc29cbc07f564e5981051540e1e26e640866f
       body: |
