@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update minio
+      hash: 15d30b247a906c450412b1b5b9bc08a4a22464d4
+      body: >
+        Update pgsty/mc from RELEASE.2026-09-13T00-00-00Z to
+        RELEASE.2026-10-18T00-00-00Z
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 0.1.1
+  title: ""
+  date: 2026-10-22T18:50:05.101Z
+- commits:
     - subject: Switch to pgsty/minio images
       hash: e3f0fd1817cd848af8bae5d5477f7dc2f94d7fac
       body: ""
