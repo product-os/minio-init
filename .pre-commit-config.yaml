@@ -14,16 +14,16 @@ repos:
 -   repo: https://github.com/rhysd/actionlint
     rev: v1.7.5
     hooks:
-    -   id: actionlint-docker
+    -   id: actionlint
         args: ["-color", "-ignore", ":info:", "-ignore", ":style:"]
 
 -   repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.43.0
     hooks:
-    -   id: markdownlint-docker
+    -   id: markdownlint
 
 -   repo: https://github.com/crate-ci/typos
     rev: v1.28.4
     hooks:
-    -   id: typos-docker
+    -   id: typos
         args: ["--force-exclude"]
