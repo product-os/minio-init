@@ -1,4 +1,23 @@
 - commits:
+    - subject: Use pre-commit hooks that need no Docker
+      hash: 87341a8812795313255d9a342fdac79e1ff93ac8
+      body: |
+        The -docker hooks build an image locally, which breaks when the active
+        buildx builder does not load images ("pull access denied" on
+        pre-commit-<hash>). typos-docker also compiles typos from source on
+        every rev bump, which needs more memory than a default Podman machine
+        has. Switch to the wheel, node and go variants.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.1.8
+  title: ""
+  date: 2026-11-23T22:21:55.770Z
+- commits:
     - subject: Install the community.general collection
       hash: c6e4b71d69c19afefeaab42019b92a58e82b7167
       body: |
